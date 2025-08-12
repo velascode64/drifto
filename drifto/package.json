@@ -10,7 +10,9 @@
     "get:google": "node oauth-setup.js",
     "auth": "node auth-server.js",
     "auth:server": "node auth-server.js",
-    "test:calendar": "node test-calendar-connection.js"
+    "test:calendar": "node test-calendar-connection.js",
+    "test:tools": "node test-tools-direct.js",
+    "debug:api": "node debug-calendar-api.js"
   },
   "keywords": [],
   "author": "",

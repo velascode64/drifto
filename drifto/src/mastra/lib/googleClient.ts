@@ -25,10 +25,8 @@ const clientCache = new Map<string, any>();
 
 // Cargar credenciales desde el archivo client_secret.json
 function loadCredentials() {
-  const credentialsPath = path.join(
-    process.cwd(),
-    'client_secret_214679969940-bstkk1ksjp436gnmn75rtn7rqs6d1a7e.apps.googleusercontent.com.json'
-  );
+  // Usar ruta absoluta porque Mastra compila el código en .mastra/output/
+  const credentialsPath = '/Users/gdesign/developer-projects/agents/drifto/drifto/client_secret_214679969940-bstkk1ksjp436gnmn75rtn7rqs6d1a7e.apps.googleusercontent.com.json';
   
   if (fs.existsSync(credentialsPath)) {
     const content = fs.readFileSync(credentialsPath, 'utf-8');

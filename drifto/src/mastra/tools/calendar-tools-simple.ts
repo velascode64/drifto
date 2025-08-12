@@ -3,10 +3,21 @@ import { z } from "zod";
 import { getGoogleCalendarClient } from "../lib/googleClient";
 import { loadStoredTokens } from "../lib/tokenManager";
 
-/** Util: obtener input desde Mastra (context.input) o directo (compat). */
+/** Util: obtener input desde Mastra - puede estar en ctx.context, ctx.input, o ctx directo */
 const getToolInput = <T>(ctx: any): T => {
-  // Mastra vX: ctx?.input; otras: ctx directo
-  return (ctx && typeof ctx === "object" && "input" in ctx ? ctx.input : ctx) as T;
+  // Mastra puede anidar los datos en diferentes lugares
+  if (ctx && typeof ctx === "object") {
+    // Caso 1: ctx.context (común en Mastra)
+    if ("context" in ctx && ctx.context) {
+      return ctx.context as T;
+    }
+    // Caso 2: ctx.input (legacy)
+    if ("input" in ctx && ctx.input) {
+      return ctx.input as T;
+    }
+  }
+  // Caso 3: ctx directo
+  return ctx as T;
 };
 
 /** Util: normalizar timestamps RFC3339 (quita milisegundos si vienen) */
