@@ -4,12 +4,12 @@ import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
 import { locationTool, timezoneConversionTool } from '../tools/location-tool';
 import { 
-    autoGoogleFreeBusyTool, 
-    autoGoogleCreateEventTool, 
-    autoGoogleListEventsTool,
-    autoGoogleUpdateEventTool,
-    autoGoogleDeleteEventTool 
-} from '../tools/calendar-tools-auto';
+    simpleFreeBusyTool,
+    simpleCreateEventTool,
+    simpleListEventsTool,
+    simpleUpdateEventTool,
+    simpleDeleteEventTool
+} from '../tools/calendar-tools-simple';
 
 export const driftoAgent = new Agent({
     name: 'Drifto Agent',
@@ -98,11 +98,11 @@ export const driftoAgent = new Agent({
     tools: { 
         detectLocation: locationTool,
         convertTimezone: timezoneConversionTool,
-        checkAvailability: autoGoogleFreeBusyTool,
-        createEvent: autoGoogleCreateEventTool,
-        listEvents: autoGoogleListEventsTool,
-        updateEvent: autoGoogleUpdateEventTool,
-        deleteEvent: autoGoogleDeleteEventTool,
+        checkAvailability: simpleFreeBusyTool,
+        createEvent: simpleCreateEventTool,
+        listEvents: simpleListEventsTool,
+        updateEvent: simpleUpdateEventTool,
+        deleteEvent: simpleDeleteEventTool,
     },
     memory: new Memory({
         storage: new LibSQLStore({
