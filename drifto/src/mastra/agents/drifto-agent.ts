@@ -63,6 +63,12 @@ export const driftoAgent = new Agent({
       - Title: Generic based on context ("Meeting", "Call", "Sync")
       - Location: Virtual with Google Meet unless specified
       
+      IMPORTANT DATE HANDLING:
+      - ALWAYS use current year (2025) for new events
+      - NEVER create events in the past
+      - If user mentions a date without year, assume current year (2025)
+      - Validate dates before creating events
+      
       Advanced capabilities:
       - Learn from user preferences over time (preferred meeting times, typical availability)
       - Handle rescheduling requests gracefully and suggest alternatives when conflicts arise

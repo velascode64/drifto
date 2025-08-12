@@ -128,6 +128,30 @@ export const simpleCreateEventTool = createTool({
     }
     const input = parsed.data;
 
+    // Validar que no se creen eventos en el pasado
+    const startTime = new Date(input.startISO);
+    const now = new Date();
+    
+    if (startTime < now) {
+      return {
+        success: false,
+        error: "Cannot create events in the past",
+        message: `Event start time ${input.startISO} is in the past. Current time: ${now.toISOString()}`
+      };
+    }
+    
+    // Validar que el año sea razonable (no muy en el futuro ni en el pasado)
+    const currentYear = now.getFullYear();
+    const eventYear = startTime.getFullYear();
+    
+    if (eventYear < currentYear || eventYear > currentYear + 2) {
+      return {
+        success: false,
+        error: "Invalid event year",
+        message: `Event year ${eventYear} is invalid. Must be between ${currentYear} and ${currentYear + 2}`
+      };
+    }
+
     const tokens = loadStoredTokens();
     if (!tokens) return { success: false, error: "No tokens found. Run: npm run auth" };
 
