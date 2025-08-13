@@ -75,6 +75,12 @@ Fase 3:
 	•	Guarda tokens de calendario en server (nunca en el teclado).
 	•	Jobs simples: renovar suscripciones si usamos webhooks más adelante.
 
+El stack:
+- Express + Railway = despliegue rápido y mínimo overhead.
+- Supabase = backend completo y listo.
+- Mastra + Supabase Auth = agentes seguros y fáciles de integrar.
+
+
 9) Supabase (datos mínimos)
 	•	profiles: formato de hora, idioma.
 	•	contacts: nombre + TZ (si el usuario la define).
